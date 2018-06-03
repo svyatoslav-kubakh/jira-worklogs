@@ -1,0 +1,26 @@
+{
+  "name": "ksar/jira-worklogs",
+  "description": "Jira Worklogs",
+  "minimum-stability": "stable",
+  "type": "project",
+  "license": "BSD-3-Clause",
+  "authors": [
+    {
+      "name": "Svyatoslav Kubakh",
+      "homepage": "http://kubakh.name",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "symfony/console": "^4.1",
+    "symfony/yaml": "^4.1",
+    "symfony/config": "^4.1",
+    "symfony/dependency-injection": "^4.1",
+    "guzzlehttp/guzzle": "^6.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
+    }
+  }
+}

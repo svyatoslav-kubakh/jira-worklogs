@@ -1,0 +1,31 @@
+#!/usr/bin/env php
+<?php
+
+set_time_limit(0);
+
+require __DIR__.'/../vendor/autoload.php';
+
+use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Output\ConsoleOutput;
+use Symfony\Component\Console\CommandLoader\ContainerCommandLoader;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+use Symfony\Component\Config\FileLocator;
+use App\Command\CredentialsCommand;
+use App\Command\ReportCommand;
+
+try {
+    $application = new Application('Jira WorkLogs', '@package_version@');
+    $containerBuilder = new ContainerBuilder();
+    $loader = new PhpFileLoader($containerBuilder, new FileLocator(__DIR__));
+    $loader->load(__DIR__.'/../config/services.php');
+    $application->setCommandLoader(new ContainerCommandLoader($containerBuilder, [
+        'credentials' => CredentialsCommand::class,
+        'report' => ReportCommand::class,
+    ]));
+    $application->run();
+} catch (Exception $e) {
+    (new ConsoleOutput())
+        ->getErrorOutput()
+        ->writeln($e->getMessage());
+}
