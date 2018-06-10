@@ -23,6 +23,9 @@ try {
         'credentials' => CredentialsCommand::class,
         'report' => ReportCommand::class,
     ]));
+    foreach (['help', 'list'] as $command) {
+        $application->get($command)->setHidden(true);
+    }
     $application->run();
 } catch (Exception $e) {
     (new ConsoleOutput())
