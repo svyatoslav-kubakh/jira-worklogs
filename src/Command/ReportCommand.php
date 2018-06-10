@@ -1,7 +1,6 @@
 <?php
 namespace App\Command;
 
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -14,7 +13,8 @@ class ReportCommand extends Command
     {
         $this
             ->setName('report')
-            ->setDescription('WorkLogs report');
+            ->setDescription('WorkLogs report')
+            ->setAliases(['r']);
     }
 
     /**
