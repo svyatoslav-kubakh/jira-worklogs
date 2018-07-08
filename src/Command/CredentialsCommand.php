@@ -1,6 +1,8 @@
 <?php
 namespace App\Command;
 
+use App\Model\Credentials;
+use App\Service\CredentialsService;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -20,7 +22,7 @@ class CredentialsCommand extends Command
         self::USER_KEY => ['User', 'u'],
         self::PASSWORD_KEY => ['Password', 'p', true],
     ];
-
+ 
     /**
      * @inheritdoc
      */
@@ -38,6 +40,13 @@ class CredentialsCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        // ...
+        $credentialsService = new CredentialsService(
+            $input->getArgument(self::PROFILE_KEY)
+        );
+        $credentialsService->save(new Credentials(
+            $input->getOption(self::SERVER_KEY),
+            $input->getOption(self::USER_KEY),
+            $input->getOption(self::PASSWORD_KEY)
+        ));
     }
 }
